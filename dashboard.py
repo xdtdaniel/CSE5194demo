@@ -14,9 +14,9 @@ df_to_plot = df_time[df_time['asset_id'] == 1]
 fig = go.Figure(data=[go.Candlestick(x=df_to_plot['time'],
                 open=df_to_plot['open'], high=df_to_plot['high'],
                 low=df_to_plot['low'], close=df_to_plot['close'])
-                     ], title='Bitcoin Price')
+                     ])
 
-fig.update_layout(xaxis_rangeslider_visible=True)
+fig.update_layout(xaxis_rangeslider_visible=True, title='Bitcoin Price')
 st.plotly_chart(fig)
 
 # st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='open'))
