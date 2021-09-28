@@ -16,7 +16,7 @@ fig = go.Figure(data=[go.Candlestick(x=df_time['time'],
                      ])
 
 fig.update_layout(xaxis_rangeslider_visible=False)
-fig.show()
+st.plotly_chart(fig)
 
 # st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='open'))
 # Plot Volatility
