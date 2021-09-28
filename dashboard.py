@@ -9,6 +9,8 @@ st.set_page_config(layout="wide")
 st.write('Hello World')
 df_coin, df_time = market_data.obtain_market_data()
 
+col1, col2 = st.columns(2)
+
 # Plot Open Price
 df_to_plot = df_time[df_time['asset_id'] == 1]
 fig = go.Figure(data=[go.Candlestick(x=df_to_plot['time'],
@@ -17,9 +19,9 @@ fig = go.Figure(data=[go.Candlestick(x=df_to_plot['time'],
                      ])
 
 fig.update_layout(xaxis_rangeslider_visible=True, title='Bitcoin Price')
-st.plotly_chart(fig)
+col1.plotly_chart(fig)
 
 # st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='open'))
 # Plot Volatility
-st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='volatility', title='Bitcoin Volatility'))
+col2.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='volatility', title='Bitcoin Volatility'))
 st.write(prettyprint_news.prettyprint(extract_news.searchCryptoNews('2021-09-20', '2021-09-21'), 10), unsafe_allow_html=True)
