@@ -10,9 +10,10 @@ st.write('Hello World')
 df_coin, df_time = market_data.obtain_market_data()
 
 # Plot Open Price
-fig = go.Figure(data=[go.Candlestick(x=df_time['time'],
-                open=df_time['open'], high=df_time['high'],
-                low=df_time['low'], close=df_time['close'])
+df_to_plot = df_time[df_time['asset_id'] == 1]
+fig = go.Figure(data=[go.Candlestick(x=df_to_plot['time'],
+                open=df_to_plot['open'], high=df_to_plot['high'],
+                low=df_to_plot['low'], close=df_to_plot['close'])
                      ])
 
 fig.update_layout(xaxis_rangeslider_visible=False)
