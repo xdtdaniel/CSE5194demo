@@ -21,5 +21,5 @@ st.plotly_chart(fig)
 
 # st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='open'))
 # Plot Volatility
-st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='volatility', , title='Bitcoin Volatility'))
+st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='volatility', title='Bitcoin Volatility'))
 st.write(prettyprint_news.prettyprint(extract_news.searchCryptoNews('2021-09-20', '2021-09-21'), 10), unsafe_allow_html=True)
