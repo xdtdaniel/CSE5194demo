@@ -6,7 +6,7 @@ import prettyprint_news
 import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
-st.write('Hello World')
+st.title('Crypto Dashboard')
 df_coin, df_time = market_data.obtain_market_data()
 
 col1, col2 = st.columns(2)
