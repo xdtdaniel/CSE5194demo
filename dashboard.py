@@ -4,14 +4,7 @@ import market_data
 import extract_news
 import prettyprint_news
 import plotly.graph_objects as go
-from transformers import pipeline
 
-label_map = {'LABEL_0': 'Negative', 'LABEL_1': 'Neutral', 'LABEL_2': 'Positive'}
-
-classifier = pipeline('sentiment-analysis', model="cardiffnlp/twitter-roberta-base-sentiment")
-result = classifier('We are very happy to show you the 🤗 Transformers library.')
-score = result[0]
-label = label_map[result[0]['label']]
 
 
 
