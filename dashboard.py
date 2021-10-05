@@ -4,6 +4,8 @@ import market_data
 import extract_news
 import prettyprint_news
 import plotly.graph_objects as go
+from transformers import pipeline
+
 
 st.set_page_config(layout="wide")
 st.title('Crypto Dashboard')
@@ -24,4 +26,8 @@ col1.plotly_chart(fig)
 # st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='open'))
 # Plot Volatility
 col2.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='volatility', title='Bitcoin Volatility'))
+classifier = pipeline('sentiment-analysis', model="cardiffnlp/twitter-roberta-base-sentiment")
+result = classifier('We are very happy to show you the 🤗 Transformers library.')
+print(result)
+st.write(result)
 st.write(prettyprint_news.prettyprint(extract_news.searchCryptoNews('2021-09-20', '2021-09-21'), 10), unsafe_allow_html=True)
