@@ -12,8 +12,6 @@ st.set_page_config(layout="wide")
 st.title('Crypto Dashboard')
 df_coin, df_time = market_data.obtain_market_data()
 
-st.write(f'{label}, {score}')
-
 col1, col2 = st.columns(2)
 
 # Plot Open Price
