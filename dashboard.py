@@ -4,7 +4,7 @@ import market_data
 import extract_news
 import prettyprint_news
 import plotly.graph_objects as go
-import get_discovery_instance, run_query from query_rewrite
+from query_rewrite import get_discovery_instance, run_query
 
 
 
