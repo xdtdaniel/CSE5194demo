@@ -24,9 +24,9 @@ fig = go.Figure(data=[go.Candlestick(x=df_to_plot['time'],
 fig.update_layout(xaxis_rangeslider_visible=True, title='Bitcoin Price')
 col1.plotly_chart(fig)
 
-dis_instance = get_discovery_instance()
+# dis_instance = get_discovery_instance()
 
-st.write(run_query(dis_instance, 'bitcoin', '10'))
+# st.write(run_query(dis_instance, 'bitcoin', '10'))
 
 # st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='open'))
 # Plot Volatility
