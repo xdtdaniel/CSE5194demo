@@ -15,11 +15,13 @@ df_coin, df_time = market_data.obtain_market_data()
 col1, col2, col3 = st.columns(3)
 
 
-daq.Thermometer(
+score_indicator = daq.Thermometer(
     value=5,
     height=150,
     width=5
 )
+
+st.plotly_chart(score_indicator)
 
 # Plot Open Price
 df_to_plot = df_time[df_time['asset_id'] == 1]
