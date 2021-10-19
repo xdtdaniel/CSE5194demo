@@ -5,7 +5,7 @@ import extract_news
 import prettyprint_news
 import plotly.graph_objects as go
 from query_rewrite import get_discovery_instance, run_query
-
+import dash_daq as daq
 
 
 st.set_page_config(layout="wide")
@@ -13,6 +13,13 @@ st.title('Crypto Dashboard')
 df_coin, df_time = market_data.obtain_market_data()
 
 col1, col2, col3 = st.columns(3)
+
+
+daq.Thermometer(
+    value=5,
+    height=150,
+    width=5
+)
 
 # Plot Open Price
 df_to_plot = df_time[df_time['asset_id'] == 1]

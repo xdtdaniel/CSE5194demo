@@ -6,3 +6,4 @@ streamlit==0.89.0
 torch==1.9.1
 transformers==4.11.2
 ibm-watson>=5.3.0
+dash-daq==0.5.0
