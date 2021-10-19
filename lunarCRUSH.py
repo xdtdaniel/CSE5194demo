@@ -22,4 +22,3 @@ def getTwitterFeed(
     result = requests.get(API, params=query).text
     result = json.loads(result)
     return result["data"]
-

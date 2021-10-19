@@ -12,7 +12,7 @@ st.set_page_config(layout="wide")
 st.title('Crypto Dashboard')
 df_coin, df_time = market_data.obtain_market_data()
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 # Plot Open Price
 df_to_plot = df_time[df_time['asset_id'] == 1]
@@ -31,4 +31,6 @@ col1.plotly_chart(fig)
 # st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='open'))
 # Plot Volatility
 col2.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='volatility', title='Bitcoin Volatility'))
-st.write(prettyprint_news.prettyprint(extract_news.searchCryptoNews('2021-09-20', '2021-09-21'), 10), unsafe_allow_html=True)
+news_md, news_senti_labels = prettyprint_news.prettyprint(extract_news.searchCryptoNews('2021-09-20', '2021-09-21'), 10)
+st.write(news_md, unsafe_allow_html=True)
+col3.plotly_chart(px.histogram(news_senti_labels)
