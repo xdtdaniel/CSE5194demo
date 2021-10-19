@@ -14,14 +14,17 @@ df_coin, df_time = market_data.obtain_market_data()
 
 col1, col2, col3 = st.columns(3)
 
+gauge_fig = go.Figure(go.Indicator(
+    mode = "gauge+number",
+    value = 4,
+    domain = {'x': [0, 1], 'y': [0, 1]},
+    title = {'text': "Bitcoin Score"},
+    gauge = {'axis': {'range': [None, 10]},
+             'steps' : [
+                 {'range': [0, 5], 'color': "lightgray"},
+                 {'range': [5, 10], 'color': "gray"}]}))
 
-score_indicator = daq.Thermometer(
-    value=5,
-    height=150,
-    width=5
-)
-
-st.plotly_chart(score_indicator)
+st.plotly_chart(gauge_fig)
 
 # Plot Open Price
 df_to_plot = df_time[df_time['asset_id'] == 1]
