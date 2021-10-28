@@ -18,7 +18,7 @@ def get_news(coin):
             passages = True, 
             deduplicate= False,
             highlight= True,
-        natural_language_query = f'10 most relevant document about {coin}'
+        natural_language_query = f'{coin} news'
 
     
     )
