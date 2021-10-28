@@ -41,7 +41,7 @@ coins_df = pd.DataFrame(columns=fields)
 time_df = pd.DataFrame(columns=time_series_cols)
 
 
-def obtain_market_data(coin_symbol):
+def obtain_market_data():
     url = f'https://api.lunarcrush.com/v2?data=assets&key={api_key}&symbol={coins}&data_points={data_num}'
     assets = json.loads(urllib.request.urlopen(url).read())
     global coins_df
