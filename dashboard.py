@@ -46,6 +46,6 @@ col1.plotly_chart(fig)
 # st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='open'))
 # Plot Volatility
 col2.plotly_chart(px.scatter(df_time[df_time['asset_symbol'] == curr_coin_symbol], x='time', y='volatility', title=f'{curr_coin_symbol} Volatility'))
-news_md, news_senti_labels = prettyprint_news.prettyprint(news_query.get_news(curr_coin_symbol))
+news_md, news_senti_labels = prettyprint_news.prettyprint(news_query.get_news(curr_coin_symbol), 10)
 st.write(news_md, unsafe_allow_html=True)
 col3.plotly_chart(px.histogram(news_senti_labels))
