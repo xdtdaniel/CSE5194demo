@@ -18,7 +18,7 @@ df_coin, df_time = market_data.obtain_market_data()
 
 reg_parameters = {'BTC': [0.00244, -0.00795], 'DOGE': [0.00173, -0.00582], 'ETH': [0.00086, -0.00271]}
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 senti_table = pd.read_csv(f'{curr_coin_symbol}_train.csv')
 fig1 = px.line(x=senti_table['time'], y=senti_table['Score'])
@@ -27,14 +27,13 @@ fig2.update_traces(line_color='red')
 fig3 = go.Figure(data=fig1.data + fig2.data)
 fig3.update_layout(title=f'{curr_coin_symbol} Sentiment Over Time')
 
-left, right = st.columns(2)
-left.plotly_chart(fig3)
+col4.plotly_chart(fig3)
 
 df_to_plot = df_time[df_time['asset_symbol'] == curr_coin_symbol]
 curr_price = round(list(df_to_plot['close'])[-1], 3)
 change_next = round((list(senti_table['Score'])[-1] * reg_parameters[curr_coin_symbol][0] + reg_parameters[curr_coin_symbol][1]) * 100, 3)
 
-right.metric(label="Price Pred for Next Hr", value=f'${curr_price}', delta=f'{change_next}%')
+st.metric(label="Price Pred for Next Hr", value=f'${curr_price}', delta=f'{change_next}%')
 
 gauge_fig = go.Figure(go.Indicator(
     mode = "gauge+number",
