@@ -15,7 +15,23 @@ curr_coin_symbol = st.selectbox('Select one coin', market_data.coin_list)
 
 df_coin, df_time = market_data.obtain_market_data()
 
+reg_parameters = {'BTC': [0.00244, -0.00795], 'DOGE': [0.00173, -0.00582], 'ETH': [0.00086, -0.00271]}
+
 col1, col2, col3 = st.columns(3)
+
+senti_table = pd.read_csv(f'{curr_coin_symbol}_train.csv')
+fig1 = px.line(x=senti_table['time'], y=senti_table['Score'])
+fig2 = px.line(x=senti_table['time'], y=[senti_table['Score'].mean()] * len(senti_table['Score']))
+fig2.update_traces(line_color='red')
+fig3 = go.Figure(data=fig1.data + fig2.data)
+fig3.update_layout(title=f'{curr_coin_symbol} Sentiment Over Time')
+st.plotly_chart(fig3)
+
+df_to_plot = df_time[df_time['asset_symbol'] == curr_coin_symbol]
+curr_price = list(df_to_plot['close'])[-1]
+change_next = (list(senti_table['Score'])[-1] * reg_parameters[curr_coin_symbol][0] + reg_parameters[curr_coin_symbol][1]) * 100
+
+st.metric(label="Price Pred for Next Hr", value=f'{curr_price}', delta=f'{change_next}%')
 
 gauge_fig = go.Figure(go.Indicator(
     mode = "gauge+number",
@@ -27,10 +43,10 @@ gauge_fig = go.Figure(go.Indicator(
                  {'range': [0, 5], 'color': "lightgray"},
                  {'range': [5, 10], 'color': "gray"}]}))
 
-st.plotly_chart(gauge_fig)
+# st.plotly_chart(gauge_fig)
 
 # Plot Open Price
-df_to_plot = df_time[df_time['asset_symbol'] == curr_coin_symbol]
+
 fig = go.Figure(data=[go.Candlestick(x=df_to_plot['time'],
                 open=df_to_plot['open'], high=df_to_plot['high'],
                 low=df_to_plot['low'], close=df_to_plot['close'])
