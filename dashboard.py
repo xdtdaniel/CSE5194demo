@@ -18,7 +18,7 @@ df_coin, df_time = market_data.obtain_market_data()
 
 reg_parameters = {'BTC': [0.00244, -0.00795], 'DOGE': [0.00173, -0.00582], 'ETH': [0.00086, -0.00271]}
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3 = st.columns(3)
 
 senti_table = pd.read_csv(f'{curr_coin_symbol}_train.csv')
 fig1 = px.line(x=senti_table['time'], y=senti_table['Score'])
@@ -63,8 +63,7 @@ col1.plotly_chart(fig)
 # st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='open'))
 # Plot Volatility
 col2.plotly_chart(px.scatter(df_time[df_time['asset_symbol'] == curr_coin_symbol], x='time', y='volatility', title=f'{curr_coin_symbol} Volatility'))
+col3.plotly_chart(fig3)
 news_md, news_senti_labels = prettyprint_news_watson.prettyprint(news_query.get_news(curr_coin_symbol), 10)
 st.write(news_md, unsafe_allow_html=True)
 # col3.plotly_chart(px.histogram(news_senti_labels, title='Top 50 News Sentiment'))
-
-col4.plotly_chart(fig3)
