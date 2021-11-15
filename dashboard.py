@@ -31,10 +31,10 @@ left, right = st.columns(2)
 left.plotly_chart(fig3)
 
 df_to_plot = df_time[df_time['asset_symbol'] == curr_coin_symbol]
-curr_price = list(df_to_plot['close'])[-1]
-change_next = (list(senti_table['Score'])[-1] * reg_parameters[curr_coin_symbol][0] + reg_parameters[curr_coin_symbol][1]) * 100
+curr_price = round(list(df_to_plot['close'])[-1], 3)
+change_next = round((list(senti_table['Score'])[-1] * reg_parameters[curr_coin_symbol][0] + reg_parameters[curr_coin_symbol][1]) * 100, 3)
 
-right.metric(label="Price Pred for Next Hr", value=f'{curr_price}', delta=f'{change_next}%')
+right.metric(label="Price Pred for Next Hr", value=f'${curr_price}', delta=f'{change_next}%')
 
 gauge_fig = go.Figure(go.Indicator(
     mode = "gauge+number",
