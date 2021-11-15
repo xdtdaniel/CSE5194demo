@@ -18,7 +18,7 @@ def get_news(coin):
             passages = True, 
             deduplicate= False,
             highlight= True,
-            count=100,
+            count=50,
         natural_language_query = f'{coin} news'
 
     
