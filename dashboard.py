@@ -27,7 +27,6 @@ fig2.update_traces(line_color='red')
 fig3 = go.Figure(data=fig1.data + fig2.data)
 fig3.update_layout(title=f'{curr_coin_symbol} Sentiment Over Time')
 
-col4.plotly_chart(fig3)
 
 df_to_plot = df_time[df_time['asset_symbol'] == curr_coin_symbol]
 curr_price = round(list(df_to_plot['close'])[-1], 3)
@@ -67,3 +66,5 @@ col2.plotly_chart(px.scatter(df_time[df_time['asset_symbol'] == curr_coin_symbol
 news_md, news_senti_labels = prettyprint_news_watson.prettyprint(news_query.get_news(curr_coin_symbol), 50)
 st.write(news_md, unsafe_allow_html=True)
 col3.plotly_chart(px.histogram(news_senti_labels, title='Top 50 News Sentiment'))
+
+col4.plotly_chart(fig3)
