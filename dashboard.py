@@ -26,13 +26,15 @@ fig2 = px.line(x=senti_table['time'], y=[senti_table['Score'].mean()] * len(sent
 fig2.update_traces(line_color='red')
 fig3 = go.Figure(data=fig1.data + fig2.data)
 fig3.update_layout(title=f'{curr_coin_symbol} Sentiment Over Time')
-st.plotly_chart(fig3)
+
+left, right = st.columns(2)
+left.plotly_chart(fig3)
 
 df_to_plot = df_time[df_time['asset_symbol'] == curr_coin_symbol]
 curr_price = list(df_to_plot['close'])[-1]
 change_next = (list(senti_table['Score'])[-1] * reg_parameters[curr_coin_symbol][0] + reg_parameters[curr_coin_symbol][1]) * 100
 
-st.metric(label="Price Pred for Next Hr", value=f'{curr_price}', delta=f'{change_next}%')
+right.metric(label="Price Pred for Next Hr", value=f'{curr_price}', delta=f'{change_next}%')
 
 gauge_fig = go.Figure(go.Indicator(
     mode = "gauge+number",
@@ -63,6 +65,6 @@ col1.plotly_chart(fig)
 # st.plotly_chart(px.scatter(df_time[df_time['asset_id'] == 1], x='time', y='open'))
 # Plot Volatility
 col2.plotly_chart(px.scatter(df_time[df_time['asset_symbol'] == curr_coin_symbol], x='time', y='volatility', title=f'{curr_coin_symbol} Volatility'))
-news_md, news_senti_labels = prettyprint_news_watson.prettyprint(news_query.get_news(curr_coin_symbol), 10)
+news_md, news_senti_labels = prettyprint_news_watson.prettyprint(news_query.get_news(curr_coin_symbol), 50)
 st.write(news_md, unsafe_allow_html=True)
 col3.plotly_chart(px.histogram(news_senti_labels))
