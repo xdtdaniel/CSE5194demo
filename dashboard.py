@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 from query_rewrite import get_discovery_instance, run_query
 import dash_daq as daq
 import news_query
+import pandas as pd
 
 st.set_page_config(layout="wide")
 st.title('Crypto Dashboard')
